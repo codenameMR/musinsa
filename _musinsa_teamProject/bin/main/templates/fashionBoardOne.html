@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="form" method="get" th:object="${selectOne}">
+	<input type="hidden" th:value="*{board_num}" name="board_num">
+	<table border="1">
+		<tr>
+			<td>제목</td>
+			<td th:text="*{title}"></td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td th:text="*{user_id}"></td>
+		</tr>
+		<tr>
+			<td th:text="*{content}"></td>
+		</tr>
+		<tr>
+			<td>댓글예정</td>
+		</tr>
+	</table>
+	<input type="submit" value="수정" onclick="javascript: form.action='/fashionBoardUpdate';">
+	<input type="submit" value="삭제" onclick="javascript: form.action='/fashionBoardDelete';">
+	</form>
+</body>
+</html>
