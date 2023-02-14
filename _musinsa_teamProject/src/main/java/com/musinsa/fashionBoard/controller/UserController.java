@@ -1,107 +1,75 @@
 package com.musinsa.fashionBoard.controller;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.musinsa.fashionBoard.model.UserVO;
-import com.musinsa.fashionBoard.service.UserService;
+
+import com.musinsa.fashionBoard.mapper.User;
+import com.musinsa.fashionBoard.mapper.UserMapper;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
 public class UserController {
-	//생성자 주입
-	private final UserService userService;
-	
-	//회원가입 페이지 출력 요청
-	@GetMapping("/user/save")
-	public String saveForm() {
-		return "save";
+
+	@Autowired
+	private UserMapper userMapper;
+
+	@GetMapping("/") // return 과 달라도 상관 없음
+	public String main(@RequestParam(value = "username", required = false,defaultValue = "손님") String id, Model model) {
+		model.addAttribute("id",id);
+		return "index";
 	}
-	
-	@PostMapping("/user/save")
-	public String save(@ModelAttribute UserVO userVO) {
-		System.out.println("UserController.save");
-		System.out.println("userVO = " + userVO);
-		userService.save(userVO);
-		return "login";
+
+	@GetMapping("/signup")
+	public String signUpForm() {
+		return "signup";
 	}
-	@GetMapping("/user/login")
-	public String loginForm() {
-		return "login";
-	}
+
+	@PostMapping("/signup")
+	public String signUp(User user,Model model) {
+		LocalDateTime createDate = LocalDateTime.now();
+		user.setDate(createDate);
 	
-	@PostMapping("/user/login")
-	public String login(@ModelAttribute UserVO userVO, HttpSession session) {
-		UserVO loginResult = userService.login(userVO);
-		if (loginResult != null) {
+		userMapper.save(user);
+
+		return "sigin";
+	}
+
+	@GetMapping("/signin")
+	public String signInForm() {
+		return "signin";
+	}
+
+	@PostMapping("signin")
+	public String signIn(@RequestParam("username") String id, User user,Model model, HttpSession session) {
+		User loginResult = userMapper.login(user);
+		
+		System.out.println(id);
+		
+		if(loginResult != null) {			
 			// login 성공
-			session.setAttribute("loginEmail", loginResult.getUserEmail());
-			return "main";
+			session.setAttribute("id", id);
+			session.setMaxInactiveInterval(30*1);
+			model.addAttribute("user",loginResult);
+			System.out.println("로그인 성공!");
+			return "index";
 		} else {
 			// login 실패
-			return "login";
+			System.out.println("로그인 실패!");
+			return "signup";
 		}
 	}
-	
-	@GetMapping("/user/")
-	public String findAll(Model model) {
-		List<UserVO> userVOList = userService.findAll();
-		model.addAttribute("userList", userVOList);
-		return "list";	
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		System.out.println("로그아웃 성공!");
+		return "redirect:/";
 	}
 	
-	@GetMapping("/user/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        UserVO userVO = userService.findById(id);
-        model.addAttribute("user", userVO);
-        return "detail";
-    }
-
-    @GetMapping("/user/update")
-    public String updateForm(HttpSession session, Model model) {
-        String myEmail = (String) session.getAttribute("loginEmail");
-        UserVO userVO = userService.updateForm(myEmail);
-        model.addAttribute("updateUser", userVO);
-        return "update";
-    }
-
-    @PostMapping("/user/update")
-    public String update(@ModelAttribute UserVO userVO) {
-        userService.update(userVO);
-        return "redirect:/user/" + userVO.getId();
-    }
-
-    @GetMapping("/user/delete/{id}")
-    public String deleteById(@PathVariable Long id) {
-        userService.deleteById(id);
-        return "redirect:/user/";
-    }
-
-    @GetMapping("/user/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "index";
-    }
-
-    @PostMapping("/user/email-check")
-    public @ResponseBody String emailCheck(@RequestParam("userEmail") String userEmail) {
-        System.out.println("userEmail = " + userEmail);
-        String checkResult = userService.emailCheck(userEmail);
-        return checkResult;
-//	        if (checkResult != null) {
-//	            return "ok";
-//	        } else {
-//	            return "no";
-//	        }
-    }
 }
