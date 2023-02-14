@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<table border="1">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thtmeleaf/layout"
+layout:decorate="~{layout/basic.html}">
+
+<div layout:fragment="content">
+<table class="table">
 <tr>
 <td>글번호</td>
 <td>제목</td>
@@ -21,5 +20,8 @@
 <td th:text="${list.upload_date}"></td>
 </tr>
 </table>
-</body>
-</html>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+console.log("script.....................");
+</script>

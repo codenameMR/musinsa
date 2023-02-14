@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.musinsa.fashionBoard.model.FashionBoardDTO">
+		<select id="selectAll" resultType="com.musinsa.fashionBoard.model.FashionBoardDTO">
+			select * from fashionBoard
+			<where>
+				<if test="user_id != null">
+					
+				</if>
+			</where>
+		</select>
+	</mapper>

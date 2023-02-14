@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.musinsa.fashionBoard.mapper.FashionBoardMapper;
 import com.musinsa.fashionBoard.model.FashionBoardDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class FashionBoroadController {
 
@@ -33,15 +35,18 @@ public class FashionBoroadController {
 	}
 	
 	@GetMapping("/fashionBoard")
-	public String fashionBoard(Model model) {
+	public String fashionBoard(Model model, HttpSession session) {
 		List<FashionBoardDTO> flist = fm.selectAll();
+		session.setAttribute("user_id", "testid");//세션
 		model.addAttribute("flist", flist);
 		return "fashionBoard";
 	}
 	
 	@GetMapping("/fashionBoardOne")
-	public String fashionBoardOne(Model model, int board_num) {
+	public String fashionBoardOne(Model model, int board_num, HttpSession session) {
+		String sessionUser = (String)session.getAttribute("user_id");
 		FashionBoardDTO fd = fm.selectOne(board_num);
+		model.addAttribute("sessionUser", sessionUser);
 		model.addAttribute("selectOne",fd);
 		return "fashionBoardOne";
 	}
