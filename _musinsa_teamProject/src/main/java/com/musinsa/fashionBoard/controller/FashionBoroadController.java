@@ -18,10 +18,10 @@ public class FashionBoroadController {
 	@Autowired
 	FashionBoardMapper fm;
 	
-	@GetMapping("/test")
-	public String test(Model model) {
+	@GetMapping("/index")
+	public String index(Model model) {
 		List<FashionBoardVO> list = fm.findAll();
 		model.addAttribute("list", list);
-		return "test";
+		return "index";
 	}
 }
