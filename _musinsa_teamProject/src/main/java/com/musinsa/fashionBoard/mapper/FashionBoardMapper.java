@@ -2,6 +2,7 @@ package com.musinsa.fashionBoard.mapper;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,4 +35,17 @@ public interface FashionBoardMapper {
 	//글삭제
 	@Delete("DELETE FROM FASHION_BOARD WHERE BOARD_NUM = #{board_num}")
 	void delete(int boardNum);
+=======
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import com.musinsa.fashionBoard.model.FashionBoardVO;
+
+
+
+@Mapper
+public interface FashionBoardMapper {
+	@Select("select * from testtb")
+	List<FashionBoardVO> findAll();
+>>>>>>> parent of f3735ed (임시클래스 삭제)
 }
