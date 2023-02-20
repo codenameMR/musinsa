@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -30,7 +30,7 @@
 						aria-current="page" th:href="@{/}">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"
 						th:href="@{/item/new}">upload</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="/fashionBoard">Community</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
@@ -52,7 +52,7 @@
 				</form>
 
 				<div id="test" th:if="${id != '손님'}" style="display: flex">
-					<th:block th:if="${user.role=='ROLE_USER'}">
+					<th:block th:if="${user?.role=='ROLE_USER'}">
 						<form class="d-flex">
 							<a class="btn btn-outline-dark"
 								th:href="@{/user/cash/{id}(id=${user.getId()})}"
@@ -71,7 +71,7 @@
 							</div>
 						</form>
 					</th:block>
-					<th:block th:if="${user.role=='ROLE_SELLER'}">
+					<th:block th:if="${user?.role=='ROLE_SELLER'}">
 						<form class="d-flex">
 							<a class="btn btn-outline-dark" href="#"
 								th:text="|현재수익 : ${user.getCoin()} ₩|"> 현재잔액 : 10000 ₩ </a>
@@ -113,7 +113,7 @@
 		</div>
 	</header>
 	<!-- Section-->
-	<section class="py-5">
+	<section class="py-5" layout:fragment="content">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div
 				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -240,8 +240,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		</div>
 		</div>
 	</section>
 	<!-- Footer-->

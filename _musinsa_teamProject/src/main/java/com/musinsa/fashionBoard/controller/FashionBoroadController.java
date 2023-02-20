@@ -23,7 +23,11 @@ public class FashionBoroadController {
 		super();
 		this.fm = fm;
 	}
-
+	@GetMapping("/test")
+	public String test() {
+		
+		return "test";
+	}
 
 	int i = 0;
 	@GetMapping("/insert")
@@ -37,7 +41,6 @@ public class FashionBoroadController {
 	@GetMapping("/fashionBoard")
 	public String fashionBoard(Model model, HttpSession session) {
 		List<FashionBoardDTO> flist = fm.selectAll();
-		session.setAttribute("user_id", "testid");//세션
 		model.addAttribute("flist", flist);
 		return "fashionBoard";
 	}

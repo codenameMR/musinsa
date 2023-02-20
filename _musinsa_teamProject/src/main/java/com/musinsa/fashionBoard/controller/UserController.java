@@ -23,7 +23,7 @@ public class UserController {
 	@GetMapping("/") // return 과 달라도 상관 없음
 	public String main(@RequestParam(value = "username", required = false,defaultValue = "손님") String id, Model model) {
 		model.addAttribute("id",id);
-		return "index";
+		return "layout/index";
 	}
 
 	@GetMapping("/signup")
@@ -38,7 +38,7 @@ public class UserController {
 	
 		userMapper.save(user);
 
-		return "sigin";
+		return "signin";
 	}
 
 	@GetMapping("/signin")
@@ -58,7 +58,7 @@ public class UserController {
 			session.setMaxInactiveInterval(30*1);
 			model.addAttribute("user",loginResult);
 			System.out.println("로그인 성공!");
-			return "index";
+			return "layout/index";
 		} else {
 			// login 실패
 			System.out.println("로그인 실패!");

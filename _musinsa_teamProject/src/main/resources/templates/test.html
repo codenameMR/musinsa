@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/index.html}">
+
+<section layout:fragment="content">
+test
+</section>
+
+<script layout:fragment="script" th:inline="javascript">
+console.log("script.....................");
+</script>
