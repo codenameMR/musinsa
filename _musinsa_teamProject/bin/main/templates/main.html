@@ -36,7 +36,7 @@
                     </ul>
                 </li>
             </ul>
-            <form th:action="@{/signin}" sec:authorize="!isAuthenticated()">
+            <form th:action="@{/signin}" sec:authorize="!isAuthenticated()" >
                 <button class="btn btn-outline-dark" type="submit">
                     로그인
                 </button>
