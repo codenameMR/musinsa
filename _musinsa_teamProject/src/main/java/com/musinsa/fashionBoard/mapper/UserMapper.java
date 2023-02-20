@@ -1,14 +1,8 @@
 package com.musinsa.fashionBoard.mapper;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
-
-
 
 @Mapper
 public interface UserMapper {
@@ -17,14 +11,22 @@ public interface UserMapper {
 			+ "VALUES(0, #{date}, #{email}, #{name}, #{password},"
 			+ "#{role}, #{username}, #{address}, #{coin}, #{phone})")
 	public int save(User user);
-	
+		
 	@Select
 	("select * from user where username = #{username} and password = #{password}")
 	public User login(User user);
-
 	
-//	@Select("SELECT i, NAME, EMAIL, AUTH FROM MEMBERS
-//      WHERE ID = #{id} AND PWD = #{pwd}
-//  
+	@Select
+	("select * from user where username = #{id}")
+	public User selectId(String id);
+
+	@Select
+	("select max(id) from user")
+	public int getMaxUserId();
+	
+	@Insert("INSERT INTO sale "
+			+ "VALUES(0, 0, #{seller_id})")
+	public int saveSale(int seller_id);
+
 }
 
