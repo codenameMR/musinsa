@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thtmeleaf/layout"
+layout:decorate="~{layout/index.html}">
+
+<div layout:fragment="content">
+<form action="/fashionBoardUpdate" method="post" th:object="${selectOne}">
+<input type="hidden" th:value="*{user_id}" name="user_id">
+<input type="hidden" th:value="*{board_num}" name="board_num">
+	<table border="1">
+		<tr>
+			<td>제목</td>
+			<td><input type="text" th:value="*{title}" name="title"></td>
+		</tr>
+		<tr>
+			<td><input type="text" th:value="*{content}" name="content"></td>
+		</tr>
+		<tr>
+			<td>댓글예정</td>
+		</tr>
+	</table>
+	<input type="submit" value="완료">
+	</form>
+</div>

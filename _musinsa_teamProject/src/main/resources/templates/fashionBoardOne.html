@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thtmeleaf/layout"
+	layout:decorate="~{layout/index.html}">
+
+<div layout:fragment="content">
+	<form name="form" method="get" th:object="${selectOne}">
+		<input type="hidden" th:value="*{board_num}" name="board_num">
+		<table border="1" class="container">
+			<tr>
+				<td>제목</td>
+				<td th:text="*{title}"></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td th:text="*{user_id}"></td>
+			</tr>
+			<tr>
+				<td th:text="*{content}"></td>
+			</tr>
+			<tr>
+				<td>댓글예정</td>
+			</tr>
+		</table>
+		<div id="submit" style="display: none">
+			<input type="submit" value="수정" onclick="javascript: form.action='/fashionBoardUpdate';"> <input
+				type="submit" value="삭제" onclick="javascript: form.action='/fashionBoardDelete';">
+		</div>
+	</form>
+</div>
+<script layout:fragment="script" th:inline="javascript">
+
+var sessionUser = /*[[${sessionUser}]]*/null; /*변수값이 없으면 오른쪽 null이 기본값이 됨*/
+var userid = /*[[*{selectOne.user_id}]]*/null;
+console.log(sessionUser);
+console.log(userid);
+if(sessionUser != null){
+	if(sessionUser == userid){
+		document.getElementById('submit').style.display = 'inline';
+	}
+}
+
+</script>
