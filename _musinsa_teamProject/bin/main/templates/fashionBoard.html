@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout/index.html}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/index.html}">
+<style>
+.table{
+margin:auto 0
+}
+</style>
 
 <section layout:fragment="content">
-<table class="table">
-<tr>
-<td>글번호</td>
-<td>제목</td>
-<td>글쓴이</td>
-<td>조회수</td>
-<td>작성일</td>
-</tr>
-<tr th:each="list : ${flist}">
-<td th:text="${list.board_num}"></td>
-<td><a th:href="@{/fashionBoardOne(board_num=${list.board_num})}" th:text="${list.title}"></a></td>
-<td th:text="${list.user_id}"></td>
-<td th:text="${list.hits}"></td>
-<td th:text="${list.upload_date}"></td>
-</tr>
-</table>
+	<table class="table container">
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>글쓴이</td>
+			<td>조회수</td>
+			<td>작성일</td>
+		</tr>
+
+		<tr th:each="list : ${flist}">
+			<td th:text="${list.board_num}"></td>
+			<td>
+			<!-- <span th:if= "${rs_step}>1" th:utext="2"></span> -->
+			
+			
+			
+			<span th:text=".ㄴ답글" th:if="${list.rs_step eq 2}"></span>
+			<span th:text="....ㄴ답글" th:if="${list.rs_step eq 3}"></span>
+			<span th:text="........ㄴ답글" th:if="${list.rs_step eq 4}"></span>
+			<span th:text="............ㄴ답글" th:if="${list.rs_step eq 5}"></span>
+			<a 
+				th:href="@{/fashionBoardOne(board_num=${list.board_num})}"
+				th:text="${list.title}" style ="text-decoration:none"></a></td>
+			<td th:text="${list.user_id}"></td>
+			<td th:text="${list.hits}"></td>
+			<td th:text="${list.upload_date}">
+			
+			</td>
+		</tr>
+		<tr>
+		<td colspan ="5" align="left">
+		<a th:href="@{/fashionBoardWritingForm}">글쓰기</a>
+		<button th:onclick="location.href='@{/fashionBoardWritingForm}'">글쓰기안됨</button>
+		<button th:onclick="location.href='/fashionBoardWritingForm'">글쓰기</button> 
+		</td>
+		</tr>
+	</table>
 </section>
 
 <script layout:fragment="script" th:inline="javascript">
-console.log("script.....................");
+	console.log("script.....................");
 </script>

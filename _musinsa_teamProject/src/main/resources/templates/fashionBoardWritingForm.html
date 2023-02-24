@@ -1,0 +1,30 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/index.html}">
+
+<section layout:fragment="content">
+	<form action="/insert">
+		<table border="1">
+			<tr>
+				<td>제목</td>
+				<td><input type="text" name="title" size="49"></td>
+			</tr>
+			<tr>
+				<td colspan="2">내용</td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea rows="5" cols="50" id="content" name="content"></textarea></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		</table>
+		<input type="submit" value="글저장하기">
+<button th:onclick="location.href='@{/fashionBoardWritingForm}'">글쓰기</button>		<input type="button" th:href="@{/fashionBoard}" value="글목록">
+		
+	</form>
+</section>
+<script layout:fragment="script" th:inline="javascript">
+	console.log("script.....................");
+</script>

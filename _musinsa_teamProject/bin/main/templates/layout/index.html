@@ -27,6 +27,8 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/fashionBoard">Community</a></li>
 				
 					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
 					<li class="nav-item dropdown"><a
@@ -50,7 +52,7 @@
 				</form>
 
 				<div id="test" th:if="${id != '손님'}" style="display: flex">
-					<th:block th:if="${user.role=='ROLE_USER'}">
+					<th:block th:if="${user?.role=='ROLE_USER'}">
 						<form class="d-flex">
 							<a class="btn btn-outline-dark"
 								
@@ -69,7 +71,7 @@
 							</div>
 						</form>
 					</th:block>
-					<th:block th:if="${user.role=='ROLE_SELLER'}">
+					<th:block th:if="${user?.role=='ROLE_SELLER'}">
 						<form class="d-flex">
 							<a class="btn btn-outline-dark" href="#"
 								th:text="|현재수익 : ${user.coin} ₩|"> 현재잔액 : 10000 ₩ </a>
@@ -111,7 +113,7 @@
 		</div>
 	</header>
 	<!-- Section-->
-<section class="py-5">
+<section layout:fragment="content" class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 

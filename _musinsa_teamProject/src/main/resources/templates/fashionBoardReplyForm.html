@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/index.html}">
+
+<section layout:fragment="content">
+	<form action="/fashionBoardReplyProc" method="get">
+		<table border="1">
+			<tr>
+				<td>제목</td>
+				<td><input type="text" name="title" size="49"></td>
+			</tr>
+			<tr>
+				<td colspan="2">내용</td>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea rows="5" cols="50" id="content" name="content"></textarea></td>
+			</tr>
+			<tr>
+			<td colspan="2" align="right">
+		<input type="hidden" name="id" th:value="${list.user_id}">
+		<input type="hidden" name="ref" th:value="${list.ref}">
+		<input type="hidden" name="rs_level" th:value="${list.rs_level}">
+		<input type="hidden" name="rs_step" th:value="${list.rs_step}">
+		<input type="submit" value="저장하기">
+		<button type="button" onclick="location.href='fashionBoard'">글목록</button>
+		</td>
+			</tr>
+		</table>
+	</form>
+</section>
+<script layout:fragment="script" th:inline="javascript">
+	console.log("script.....................");
+</script>

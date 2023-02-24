@@ -32,10 +32,15 @@ public class UserController {
 		List<Item> items = itemMapper.selectAllItem();
 		model.addAttribute("id",id);
 		model.addAttribute("items", items);
-		return "index";
+		return "layout/index";
 	}
 	
 
+	@GetMapping("/home")
+	public String hi() {
+		return "redirect:/";
+	}
+	
 	@GetMapping("/signup")
 	public String signUpForm() {
 		return "signup";
@@ -69,10 +74,10 @@ public class UserController {
 		if(loginResult != null) {			
 			// login 성공
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*1);
+			session.setMaxInactiveInterval(60*100);
 			model.addAttribute("user",loginResult);
 			System.out.println("로그인 성공!");
-			return "index";
+			return "layout/index";
 		} else {
 			// login 실패
 			System.out.println("로그인 실패!");

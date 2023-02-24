@@ -44,7 +44,7 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
     <!--<div class="col-md-7 col-lg-8 container">-->
-        <form action="/item/new" method="post" >
+        <form action="/item/new" method="post"  enctype="multipart/form-data" >
             <div class="row g-3">
                 <hr/>
                 <div class="col-12">
@@ -94,12 +94,17 @@
                         Input is empty.
                     </div>
                 </div>
-<!-- 
                 <div class="col-12">
-                    <label for="text" class="form-label">상품 이미지 업로드</label>
-                    <input type="file" class="form-control" id="imgFile" name="imgFile"> -->
-                </div>
-            </div>
+                     <label for="text" class="form-label">상품 이미지 업로드</label> <input
+                        type="file" class="form-control" id="file" name="file" >
+                  </div>
+               </div>
+
+<!--                 <div class="col-12"> -->
+<!--                     <label for="text" class="form-label">상품 이미지 업로드</label> -->
+<!--                     <input type="file" class="form-control" id="imgFile" name="imgFile"> -->
+<!--                 </div> -->
+<!--             </div> -->
             <hr class="my-4">
             <button class="w-100 btn btn-primary btn-lg mb-3" type="submit">상품 등록</button>
         </form>
